@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>CiscoHelp</title>
+</head>
+<body>
+<header class="cd-header flex flex-column flex-center">
+  <div class="text-component text-center">
+	<h1>Cisco hálózati eszközök beállításai - összefoglaló <br>
+	CCNA1 -CCNA2</h1>
+  </div>
+</header>
+
+<section class="cd-faq js-cd-faq container max-width-md margin-top-lg margin-bottom-lg">
+	<ul class="cd-faq__categories">
+		<li>
+			<a class="cd-faq__category cd-faq__category-selected truncate" href="#basics">
+				A beállítások elérése<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#alap">
+				Alapvető beállítások<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#interface">
+				Interfészek beállítása, IP címek<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#kezeles">
+				Konfiguráció kezelése<br>
+			</a>
+		</li>
+		
+		<li>
+			<a class="cd-faq__category truncate" href="#portbiztonsag">
+				Portbiztonság<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#vlanok">
+				VLAN -ok<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#vtp">
+				VTP - virtuális trunk protokoll<br>
+			</a>
+		</li>
+				<li>
+			<a class="cd-faq__category truncate" href="#rstp">
+				RSTP - Rapid Spanning Protocol <br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#statfi">
+				Statikus forgalomirányítás<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#dinfi">
+				Dinamikus forgalomirányítás<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#acl">
+				Forgalomszűrés (ACL)<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#dhcp">
+				DHCP<br>
+			</a>
+		</li>
+		<li>
+			<a class="cd-faq__category truncate" href="#nat">
+				Címfordítás (NAT)<br>
+			</a>
+		</li>
+	</ul>
+	<div class="cd-faq__items">
+		<ul id="basics" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Konzolos kapcsolat lehetőségei</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Kapcsolódás közvetlenül, konzol kábellel</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>
+							Ekkor a készülék közelében kell lennünk. A beállításokhoz RS232 szabványú, soros porton keresztül férhetünk hozzá. Windows alatt az eszközkezelőben COM és egy szám alatt találjuk.
+							A fizikai csatlakozó 9 pólusú apa, DB9 típusú.
+						</p>
+						<p>
+							Ha nincs az alaplapon (pl. laptop), USB -soros átalakító kábelt használhatunk. Ekkor USB-SERIAL
+							jelenik meg az eszközkezelőben.
+						</p>
+						<p>	
+							<img src="pic/DB9.JPG" alt="serial port" />
+							<img src="pic/usbserial.jpg" alt="usb serial converter" />
+							<img src="pic/winserial.png" alt="windows device manager serial" />
+						</p>
+						<p>
+							A készüléken lévő console feliratú porthoz csatlakozik a konzol, más néven rollover kábel, melynek másik vége RJ45 típusú, ugyanaz, mint a hálózati kábel csatlakozója.
+							Gyakran kék színű, a Packet Tracerben is az.
+							<img src="pic/consolecable.jpg" alt="cisco console cable" />
+							<img src="pic/consoleport.jpg" alt="cisco console port" />
+					    </p>
+					</div><!-- text-component -->
+				</div> <!-- cd-faq__content -->
+			</li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Szoftverek</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>A program, amivel csatlakozni lehet a terminál emulátor. 
+							Pl. <a href="https://www.putty.org/">Putty </a>,  <a href="https://ttssh2.osdn.jp/index.html.en/">TeraTerm </a>, 
+							<a href="https://www.vandyke.com/products/securecrt/">SecureCRT </a>, <a href="https://tabby.sh">Tabby </a>
+						</p>
+						<p>
+						Az emulátorban csatlakozás előtt be kell állítani a soros port tulajdonságait:
+						Ennek módja programonként eltérő, ezen kívül lehet még színeket, betűtípusokat is állítani,
+						elmenteni ezeket a beállításokat.
+						<ul>
+							<li>Soros port száma: COM1</li>
+							<li>Sebesség: 9600 (baud)</li>
+							<li>Adatbitek száma: 8</li>
+							<li>Stop bitek száma: 1</li>
+							<li>Paritás: nincs</li>
+							<li>Átvitelvezérlés (flow control): nincs</li>
+						</ul>
+						</p>
+						<p>
+							Más gyártmányú készülékek esetén más beállítások kellhetnek.
+						</p>
+						<p>
+							<img src="pic/puttyserial.jpg" alt="putty settings" />
+							<img src="pic/tabbyserial.jpg" alt="tabby settings" />
+						</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Távoli hozzáférés</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Az előző programok alkalmasak arra is, hogy hálózaton keresztül férjünk hozzá a beállításokhoz.
+							Ehhez először a készüléken be kell állítani annak IPv4 vagy IPv6 címét, valamint a hozzáférés
+							protokollját, ami Telnet (nem ajánlott), vagy SSH lehet (titkosított, ajánlott). A programban
+							utána ezt kell beállítani.
+						</p>
+						<p>
+							<img src="pic/puttyssh.jpg" alt="putty ssh" />
+						</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Parancssor módjai</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Miután kapcsolódtunk, az eszköz nevét látjuk, ami alapértelmezetten Switch, vagy Router.
+							Ezt követi az üzemmódjelző - <strong>&gt</strong> vagy <strong>#</strong> karakterek:</p>
+							<ul>
+								<li>Router<strong>&gt</strong> - Felhasználói mód, beállítások megtekintése,
+									 távoli kapcsolat (telnet, ssh) más eszközökre.</li>
+								<li>Router&gt<b>enable</b> - Átlépés privilegizált módba.</li>
+								<li>Router<strong>#</strong> - Privilegizált mód, előző mód + idő, dátum beállítás,
+									lényegi működést nem befolyásoló beállítások.</li>
+								<li>Router#<b>configure terminal</b> - Továbblépés globális konfigurációs módba.</li>
+								<li>Router(config)# - Globális konfigurációs mód, a készülék egészére vonatkozó beállítások
+									elérése, pl. állomásnév.
+								</li>
+								<li>Router(config)#<b>interface g0/0</b> - Továbblépés interfész alkonfigurációs módba.</li>
+								<li>Router<strong>(config-if)#</strong> - Alkonfigurációs mód, a kötőjel utáni szöveg utal rá, mit állítunk be. 
+									Pl. -if interfész beállítása, -line vonal beállítása, stb. a készülék egy kiválasztott
+								részének, funkciójának működése állítható.</li>
+							</ul>
+						
+						<p>A parancssor kezelésére vonatkozó további parancsok, billentyűkombinációk:</p>
+						<ul>
+							<li><strong>?</strong> - Help, kilistázza az adott módban elérhető parancsokat.</li>
+							<li><strong>parancs ?, parancs érték ?</strong> - Help, kilistázza a parancs mit vár beállítási értéknek. 
+								Több érték esetén így végig lehet lépdelni a paramétereken..</li>
+							<li><strong>parancskezdet?</strong> - Help, kilistázza az adott módban elérhető kezdetű parancsokat,
+							pl. a <b>te?</b> a telnet terminal test parancsokat ajánlja fel.</li>
+							<li><strong>parancskezdetTAB</strong> - Kiegészíti az adott módban elérhető kezdetű parancsokat,
+								ha az a kezdetből egyértelmű, így nem kell begépelni az egészet. TAB billentyű nélkül is 
+							elfogadja a rövidítést. (haladóknak...)</li>
+							<li><strong>parancskezdet?</strong> - Help, kilistázza az adott módban elérhető kezdetű parancsokat,
+								pl. a <b>te?</b> a telnet terminal test parancsokat ajánlja fel.</li>
+							<li><strong>exit</strong> - Visszalép eggyel a parancsszintek között.</li>
+							<li><strong>end, vagy Ctrl+z</strong>- Visszalép privilegizált # módba.</li>
+							<li><strong>do</strong> privilegizált módú parancs - Konfig módban privilegizált módú parancs
+							végrehajtása, pl. <b>show</b> parancsok megtekintése beállítás közben visszalépés nélkül. Pl. 
+							<strong>Router(config)#<b>do show version</b></strong></li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+		
+
+		<ul id="alap" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Alapvető beállítások</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Hostname beállítása</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>A router neve legyen R1!</p>
+						<ul>
+							<li>Router&gt<b>enable</b></li>
+							<li>Router#<b>configure terminal</b></li>
+							<li>Router(config)#<b>hostname R1</b></li>
+							<li>R1(config)#</li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Jelszavak beállítása</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>A konzol jelszó beállítása konzol1234 -re</p>
+						<ul>
+							<li>Router(config)#<b>line con 0</b></li>
+							<li>R1(config-line)#<b>password konzol1234</b></li>
+							<li>R1(config-line)#<b>login</b></li>
+							<li>R1(config-line)#</li>
+						</ul>
+						<p>A privilegizált mód jelszavának beállítása priv1234 -re</p>
+						<ul>
+							<li>Router(config)#<b>enable password priv1234</b></li>
+							<li>R1(config-line)#</li>
+						</ul>
+						<p>A privilegizált mód jelszavának beállítása priv1234 -re tikosított módon</p>
+						<ul>
+							<li>Router(config)#<b>enable secret priv1234</b></li>
+							<li>R1(config-line)#</li>
+						</ul>
+						<p>A távoli hozzáférés (VTY vonalak) jelszavának beállítása tavoli1234 -re. <br>
+						16 ilyen vonal van (VTY 0-15), most az első ötöt állítjuk be.</p>
+						<ul>
+							<li>Router(config)#<b>line vty 0 4</b></li>
+							<li>R1(config-line)#<b>password tavoli1234</b></li>
+							<li>R1(config-line)#<b>login</b></li>
+							<li>R1(config-line)#</li>
+						</ul>
+						<p>Jelszavak titkosítása</p>
+							<ul>
+								<li>R1(config)#<b>service password-encryption</b></li>
+							</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Üzenetek</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Bejelentkezési üzenet, sikeres belépéskor írja ki.</p>
+							<ul>
+								<li>R1(config)#<b>banner login "Udv!"</b></li>
+							</ul>
+						<p>Napi üzenet, sikeres csatlakozáskor írja ki legelőször, általában jogi tudnivalók.</p>
+							<ul>
+								<li>R1(config)#<b>banner motd "Belepes csak arra jogosultaknak"</b></li>
+							</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+						<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Egyéb kényelmi beállítások</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Hibás parancs keresésének letiltása.</p>
+							<ul>
+								<li>R1(config)#<b>no ip domain-lookup</b></li>
+							</ul>
+						<p>Log üzenetek, események ne szakítsák félbe az éppen bevitt parancsot.</p>
+							<ul>
+								<li>R1(config)#<b>logging synchronous</b></li>
+							</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+		
+		<ul id="interface" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Interfészek beállítása, IP címek, duplex</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Ethernet interfész IPv4 címének beállítása</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Beállítás előtt érdemes ellenőrizni az interfészek nevét, számozását, mivel moduláris
+							eszközöknél ez attól függ, melyik helyre van az interfészkártya behelyezve.
+						</p>
+						<ul>
+							<li>R1#<b>show ip interface brief</b>
+								<img src="pic/interfaces.jpg" alt="show ip interface brief" />
+							</li>
+							<p>IPv4 cím beállítása. Megadható egy leírás (description) is az interfészhez.</p>
+								<li>R1#<b>configure terminal</b></li>
+								<li>R1(config)#<b>interface fastethernet0/0/0</b></li>
+								<li>R1(config)#<b>description Marketing halozat</b></li>
+								<li>R1(config-if)#<b>ip address 192.168.0.14 255.255.255.0</b></li>
+								<li>R1(config-if)#<b>no shutdown</b></li>
+								<li>%LINK-5-CHANGED: Interface FastEthernet0/0/0, changed state to up</li>
+								<li>R1(config-if)#</li>
+							<p>Duplex, sebesség beállítási lehetőségek:</p>
+								<li>R1 (config-if)#<b>duplex auto | half | full</b></li>
+								<li>R1 (config-if)#<b>speed auto | 10 | 100</b></li>
+								<li>R1(config-if)#<b>exit</b></li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>VLAN interfész beállítása</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>IPv4 cím beállítása VLAN interfészen (kapcsolón is):</p>
+						<ul>
+							<li>S1#<b>configure terminal</b></li>
+							<li>S1(config)#<b>interface vlan1</b></li>
+							<li>S1(config-if)#<b>ip address 10.10.10.100 255.255.255.0</b></li>
+							<li>S1(config-if)#<b>no shutdown</b></li>
+							<li>%LINK-5-CHANGED: Interface Vlan1, changed state to up</li>
+							<li>S1(config-if)#</li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>IPv4 cím beállítása soros interfészen</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>IPv4 cím beállítása soros interfészen. A kábel DCE felőli interfészén 
+							órajelet kell beállítani, és csak ezen az oldalon!</p>
+						<ul>
+							<li>R1#<b>configure terminal</b></li>
+							<li>R1(config)#<b>interface serial 0/0/1</b></li>
+							<li>R1(config)#<b>description Soros kapcsoalt R2 fele</b></li>
+							<li>R1(config-if)#<b>ip address 10.10.78.1 255.255.255.252</b></li>
+							<li>R1(config-if)#<b>clock rate 64000</b></li>
+							<li>R1(config-if)#<b>ip address 10.10.78.1 255.255.255.252</b></li>
+							<li>R1(config-if)#<b>no shutdown</b></li>
+							<li>%LINK-5-CHANGED: Interface Serial 0/0/1, changed state to up</li>
+							<li>R1(config-if)#</li>
+		
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Loopback interfész beállítása</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Loopback interfész a beállítással jön létre, többet is létrehozhatunk.</p>
+						<ul>
+							<li>R1(config)#<b>interface loopback 0</b></li>
+							<li>R1(config-if)#<b>ip address 100.0.0.1 255.255.255.255</b></li>
+							<li>R1(config-if)#<b>no shutdown</b></li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>IPv6 cím beállítása</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>IPv6 címnél, ha link local típusút állítunk be, azt külön meg kell adni
+							valamint nem kell megadni a prefixet!</p>
+						<ul>
+							<li>R1(config)#<b>interface GigabitEthernet0/0</b></li>
+							<li>R1(config-if)#<b>ipv6 address fe80::1 link-local</b></li>
+							<li>R1(config-if)#<b>ipv6 address 2a01:fc00::1/64 </b></li>
+						<p>Ellenőrzés:</p>
+							<li>R1#<b>show ipv6 interface brief</b></li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+		<ul id="kezeles" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Koniguráció ellenőrzése, mentése, törlése</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Futó konfiguráció</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Az aktuális beállítások megtekintése:</p>
+						<ul>
+							<li>R1#<b>show running-config</b></li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Indító konfiguráció (NVRAM -ba mentett)</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Az elmentett beállítások megtekintése:</p>
+						<ul>
+							<li>R1#<b>show startup-config</b></li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Beállítások törlése</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Az indító beállítások törlése:</p>
+						<ul>
+							<li>R1#<b>write erase</b></li>
+							<p>VAGY</p>
+							<li>R1#<b>delete nvram:startup-config</b></li>
+							<p>Ha van VLAN is, azt külön kell törölni:</p>
+							<li>R1#<b>delete vlan.dat</b></li>
+							<p>Ha gyári beállításokat szeretnénk, újra kell indítani:</p>
+							<li>R1#<b>reload</b></li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Beállítások másolása TFTP szerverre</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Az indító beállítások törlése:</p>
+						<ul>
+							<li>R1#<b>write erase</b></li>
+							<p>VAGY</p>
+							<li>R1#<b>delete nvram:startup-config</b></li>
+							<p>Ha van VLAN is, azt külön kell törölni:</p>
+							<li>R1#<b>delete vlan.dat</b></li>
+							<p>Ha gyári beállításokat szeretnénk, újre kell indítani:</p>
+							<li>R1#<b>reload</b></li>
+						</ul>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+		</ul> <!-- cd-faq__group -->
+
+		<ul id="portbiztonsag" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Portbiztonság</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Hiányzó tartalom</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Hiányzó tartalom</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Hiányzó tartalom</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Hiányzó tartalom</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+		<ul id="vlanok" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>VLAN-ok</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Megadhatom a saját privát kulcsomat?</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>VLAN-oknál nem szükséges és nem is ajánlott a saját privát kulcsodat megadni. A VLAN-ok a hálózati szegmentálás eszközei, és a hozzáférés kontrollálása inkább a hálózati eszközök (pl. switch-ek) konfigurálásával történik, nem a kulcsokkal. Ha titkosított kapcsolatot kell létrehoznod egy eszközzel, például VPN-en keresztül, akkor ott jönnek jól a privát kulcsok, de maga a VLAN kezelés nem igényel privát kulcsokat.</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Eltűntek a fájljaim! Hogyan kaphatom vissza őket?</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Ha VLAN környezetben tűntek el a fájljaid, valószínű, hogy egy hálózati tárolóról (pl. NAS vagy szerver) vagy a felhőből hiányoznak. Ellenőrizd a szerver vagy tárolórendszer biztonsági mentéseit, és kérd a rendszergazda segítségét. Ha felhőalapú tárolóról van szó, nézd meg a törölt fájlok mappáját, vagy kérj visszaállítást. A VLAN maga nem okozhat fájleltűnést, de hálózati problémák miatt előfordulhat, hogy a fájlok elérhetetlenné váltak. </p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Hogyan férhetek hozzá a fiókom adataihoz?</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>VLAN környezetben a fiókod adataihoz úgy férhetsz hozzá, hogy először biztosítod a megfelelő hálózati hozzáférést a kívánt VLAN-hoz. Ezután be kell jelentkezned a rendszerbe a felhasználóneveddel és jelszavaddal. Ha szükséges, VPN-en keresztül kell csatlakoznod, és ellenőrizned kell, hogy rendelkezel a megfelelő jogosultságokkal. Ha kétfaktoros hitelesítés van beállítva, egy második megerősítést is szükséges végrehajtani.</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Hogyan tudom ellenőrizni, hogy más keresőmotorok linkelhetnek-e a profilomra?</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>A VLAN-ok nem befolyásolják közvetlenül, hogy a keresőmotorok linkelhetnek-e a profilodra, de ha szeretnéd ellenőrizni, hogy hozzáférhetnek-e, akkor először nézd meg a saját weboldaladon a robots.txt fájlt, hogy a keresőmotorok számára mely oldalak elérhetők. A weboldaladon a noindex, nofollow meta címkék használatával megakadályozhatod, hogy a keresőmotorok indexeljék. Ezen kívül kereshetsz rá a profilodra a keresőmotorokban, hogy megnézd, megjelenik-e, és ha közösségi médián van, állíthatsz privát beállításokat, hogy csak engedélyezettek láthassák. Végül, ha saját weboldalad van, használhatod a Google Search Console vagy Bing Webmaster Tools eszközöket, hogy ellenőrizd, hogyan indexelik az oldalad.</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+		<ul id="vtp" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>VTP</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Hiányzó tartalom</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>
+						</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Eltűntek a fájljaim! Hogyan kaphatom vissza őket?</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Ha eltűntek a fájljaid a VPT-n, először ellenőrizd a szemetet (Recycle Bin), hátha véletlenül törlődtek. Ha van biztonsági mentésed, próbáld meg onnan visszaállítani őket. Használhatsz fájl-helyreállító programokat is, mint a Recuva, hogy visszaszerezd a fájlokat. Ha ezek nem segítenek, vedd fel a kapcsolatot a VPT ügyfélszolgálatával, hátha a fájlok ideiglenesen tárolódnak, és visszaállíthatók. Ha minden kudarcot vall, egy szakértői segítség is szóba jöhet.
+						</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">Hogyan férhetek hozzá a fiókom adataihoz?
+				<a class="cd-faq__trigger" href="#0"><span></span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>A VPT fiókod adataihoz való hozzáféréshez először jelentkezz be a felhasználóneveddel és jelszavaddal. Ha elfelejtetted a jelszót, használd a "Jelszó visszaállítása" opciót. Miután bejelentkeztél, keresd meg a "Fiók" vagy "Beállítások" menüpontot, hogy elérd a profilodat és biztonsági beállításaidat. Ha kétfaktoros hitelesítés van beállítva, akkor szükséged lesz egy kódra, amit egy másik eszközről kapsz. Ha nem férsz hozzá a fiókodhoz, vedd fel a kapcsolatot a VPT ügyfélszolgálatával, hogy segítsenek. Ezen kívül biztonsági kérdések vagy e-mail alapú visszaállítást is használhatsz.
+						</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Hogyan tudom ellenőrizni, hogy más keresőmotorok linkelhetnek-e a profilomra?</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>A VLAN-ok és a VPT rendszerek esetében, ha szeretnéd ellenőrizni, hogy más keresőmotorok linkelhetik-e a profilodat, először érdemes megnézned a profilod webhelyének metaadatait. A weboldalad HTML kódjában a metaadatok között beállíthatsz egy „robots.txt” fájlt vagy meta tag-eket, amelyek szabályozzák a keresőmotorok viselkedését. Ha azt szeretnéd, hogy a keresők ne indexeljék az oldaladat, akkor a „robots.txt” fájlba beillesztheted a megfelelő sort, például „Disallow: /”, ami megakadályozza az indexelést. Ha a profilod csak egy belső hálózaton érhető el, például VPN-en keresztül, akkor a keresőmotorok nem férhetnek hozzá, mivel azok csak a nyilvános oldalakat indexelik, így nem kell aggódnod a keresők általi linkelés miatt. Ha nyilvános profilod van, és szeretnéd látni, hogy a keresők linkelhetnek-e rá, regisztrálhatsz a Google Search Console vagy a Bing Webmaster Tools felületeken, ahol ellenőrizheted, hogy melyik keresőmotorok indexelték az oldaladat. Végül, egy egyszerű módszer annak ellenőrzésére, hogy más keresőmotorok linkelhetik-e a profilodat, ha beírod a profilod nevét vagy más kulcsszavakat a keresőbe, és megnézed, hogy megjelenik-e a találatok között. Ha nem szeretnéd, hogy a keresők indexeljék az oldaladat, akkor érdemes beállítani a robots.txt fájlt vagy meta tag-eket, hogy biztosan ne férjenek hozzá.</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+		<ul id="rstp" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>RSTP</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Feladata</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>A feszítőfa protokollok családjának (STP,RSTP,PVST+) feladata, hogy redundáns útvonalakat tartalmazó kapcsolók összekötésénél megakadályozza a hurkok kialakulását. A hurkokban keringő szórásos üzenetek túltrahelik a hálózatot, valamint a kapcsolók CAM táblája telítődhet, mert különböző portokon is megjelenik ugyanaz a forrás MAC cím, amit felvesz oda.</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Az RSTP működése</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Az RTSP (Real-Time Streaming Protocol) egy hálózati vezérlőprotokoll, amely IP-kamerák és médiaszerverek közötti videó/audio adatfolyamok (stream) elindítására, szüneteltetésére és vezérlésére szolgál. A 554-es alapértelmezett porton működve, az RTP segítségével továbbítja a tényleges adatokat, lehetővé téve a valós idejű megfigyelést. </p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Portfast</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Feladata: azzonali további modba állitás <br>
+							-stp protokol kikerúlése <br>
+							-végberendezéshez(pc, szerver)</p>
+							<img src="pic/Képernyőkép 2026-02-27 112856.png" alt="usb serial converter">
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>BDPU Guard</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>Biztonságos megoldás a hibás konfiguráció ellen</p>
+						<img src="pic/BPDU.png" alt="usb serial converter">
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>Portszerepkörök</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>A root port mindig a root bridge felé néz</p>
+						A designated port minde ami bemeneti -> Root bridge <br>
+						Nem root bridge vagy kijelőltport, így alternativ vagy blokkolt porttá válik<br>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+		
+
+
+		<ul id="statfi" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Statikus forgalomirányitás</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>? </p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+		<ul id="dinfi" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Dinamikus forgalomirányítás</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>? </p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+		<ul id="acl" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Forgalomszűrés (ACL)</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>? </p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+		<ul id="dhcp" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>DHCP</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>? </p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+		<ul id="nat" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Címfordítás (NAT)</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>? </p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>??</span></a>
+				<div class="cd-faq__content">
+					<div class="text-component">
+						<p>?</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+	</div> <!-- cd-faq__items -->
+
+	<a href="#0" class="cd-faq__close-panel text-replace">Close</a>
+
+	<div class="cd-faq__overlay" aria-hidden="true"></div>
+</section> <!-- cd-faq -->
+<script src="assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+<script src="assets/js/main.js"></script> 
+</body>
+</html>
